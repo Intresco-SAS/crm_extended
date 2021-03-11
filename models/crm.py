@@ -9,6 +9,7 @@ class CrmLead(models.Model):
     score = fields.Char(string="Score")
     stage_name = fields.Char(string="stage name",related="stage_id.name")
     teacher_id = fields.Many2one('res.users',related="team_id.user_id",string="teacher")
+    x_motivo = fields.Char(string="Motivo")
     # facilitador = fields.Many2one('res.users',string="Facilitador",compute="_compute_facilitador")
 
     # def _compute_facilitador(self):
@@ -28,7 +29,8 @@ class CrmLeadLost(models.TransientModel):
 
     start_date = fields.Date(string="StartDate" ,default=_default_crm_lead_date)
     end_date = fields.Date(string="EndDate",default=fields.Datetime.now)
-    score = fields.Selection([('p_good','Pretty Good'),('good','Good'),('bad','Bad'),('p_bad','Pretty Bad')],string="Score",default="good")
+    score = fields.Selection([('p_good','Muy Bueno'),('good','Bueno'),('bad','Malo'),('p_bad','Muy Malo')],string="Puntaje")
+    x_motivo = fields.Char(string="Motivo")
 
     def action_lost_reason_apply(self):
         res = super(CrmLeadLost, self).action_lost_reason_apply()
@@ -36,6 +38,7 @@ class CrmLeadLost(models.TransientModel):
         leads.lost_start_date = self.start_date
         leads.lost_end_date = self.end_date
         leads.score = self.score
+        leads.x_motivo = self.x_motivo
         return res
 
 class salesTeam(models.Model):

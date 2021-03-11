@@ -4,7 +4,8 @@
         <field name="model">crm.lead.lost</field>
         <field name="inherit_id" ref="crm.crm_lead_lost_view_form"/>
         <field name="arch" type="xml">
-            <field name="lost_reason_id" position="after">
+            <field name="lost_reason_id" position="replace">
+            	<field name="x_motivo"/>
                 <field name="start_date"/>
                 <field name="end_date"/>
                 <field name="score"/>
@@ -17,7 +18,8 @@
         <field name="model">crm.lead</field>
         <field name="inherit_id" ref="crm.crm_lead_view_form"/>
         <field name="arch" type="xml">
-            <field name="lost_reason" position="after">
+            <field name="lost_reason" position="replace">
+            	<field name="x_motivo" readonly="1" attrs="{'invisible':[('active', '=', True)]}"/>
                 <field name="lost_start_date" readonly="1" attrs="{'invisible':[('active', '=', True)]}"/>
                 <field name="teacher_id" invisible="1"/>
                 <field name="lost_end_date" readonly="1" attrs="{'invisible':[('active', '=', True)]}"/>
