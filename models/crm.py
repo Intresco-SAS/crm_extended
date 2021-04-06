@@ -11,6 +11,8 @@ class CrmLead(models.Model):
     teacher_id = fields.Many2one('res.users',related="team_id.user_id",string="teacher")
     x_motivo = fields.Char(string="Motivo")
     # facilitador = fields.Many2one('res.users',string="Facilitador",compute="_compute_facilitador")
+    mentor_id = fields.Many2one('hr.employee',string="Mentor")
+    mentor_user_id = fields.Many2one('res.users',string="Mentor user",related="mentor_id.user_id")
 
     # def _compute_facilitador(self):
     #     for line in self:

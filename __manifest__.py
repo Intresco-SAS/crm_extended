@@ -3,13 +3,13 @@
 
 
 {
-    'name': 'CRM Extended 1',
+    'name': 'CRM Extended',
     'version': '13.0.0.1',
     'category': 'CRM',
     'description': """
     
 """,
-    'author': 'Janbaz Aga ',
+    'author': 'Janbaz Aga (janbazaga444@gmail.com)',
     'website': '',
     'images': [],
     'depends': ['crm'],
