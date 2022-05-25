@@ -10,6 +10,18 @@ class CrmLead(models.Model):
     stage_name = fields.Char(string="stage name",related="stage_id.name")
     teacher_id = fields.Many2one('res.users',related="team_id.user_id",string="teacher")
     x_motivo = fields.Char(string="Motivo")
+    x_motivo_2 = fields.Selection([('no_interesa_r', 'No esta interesado en recibir el acompañamiento'),
+                                   ('no_interesa_c', 'No está interesado en continuar el acompañamiento'),
+                                   ('no_tiempo', 'No continua con el acompañamiento por falta de tiempo o disposición'),
+                                   ('no_salud', 'No continua con el acompañamiento por temas de salud o de fuerza mayor'),
+                                   ('no_datos', 'No Autoriza y/o quiere dar sus datos y del micronegocio'),
+                                   ('num_mal', 'Numero de contacto equivocado'),
+                                   ('no_conta', 'No se pudo contactar'),
+                                   ('cierre_mic', 'Cierre del micronegocio / cambio de administración'),
+                                   ('pro_trab', 'El propietario está actualmente trabajando o empezara a trabajar'),
+                                   ('des_acom', 'Desconocimiento frente al proceso de acompañamiento'),
+                                   ('dupl', 'Duplicado/Registrado por error'),
+                                   ('no_rec', 'No puede realizar actividades por falta de recursos"')])
     # facilitador = fields.Many2one('res.users',string="Facilitador",compute="_compute_facilitador")
     mentor_id = fields.Many2one('hr.employee',string="Mentor")
     mentor_user_id = fields.Many2one('res.users',string="Mentor user",related="mentor_id.user_id")
@@ -33,6 +45,18 @@ class CrmLeadLost(models.TransientModel):
     end_date = fields.Date(string="EndDate",default=fields.Datetime.now)
     score = fields.Selection([('p_good','Muy Bueno'),('good','Bueno'),('bad','Malo'),('p_bad','Muy Malo')],string="Puntaje")
     x_motivo = fields.Char(string="Motivo")
+    x_motivo_2 = fields.Selection([('no_interesa_r', 'No esta interesado en recibir el acompañamiento'),
+                                   ('no_interesa_c', 'No está interesado en continuar el acompañamiento'),
+                                   ('no_tiempo', 'No continua con el acompañamiento por falta de tiempo o disposición'),
+                                   ('no_salud', 'No continua con el acompañamiento por temas de salud o de fuerza mayor'),
+                                   ('no_datos', 'No Autoriza y/o quiere dar sus datos y del micronegocio'),
+                                   ('num_mal', 'Numero de contacto equivocado'),
+                                   ('no_conta', 'No se pudo contactar'),
+                                   ('cierre_mic', 'Cierre del micronegocio / cambio de administración'),
+                                   ('pro_trab', 'El propietario está actualmente trabajando o empezara a trabajar'),
+                                   ('des_acom', 'Desconocimiento frente al proceso de acompañamiento'),
+                                   ('dupl', 'Duplicado/Registrado por error'),
+                                   ('no_rec', 'No puede realizar actividades por falta de recursos"')])
 
     def action_lost_reason_apply(self):
         res = super(CrmLeadLost, self).action_lost_reason_apply()
@@ -41,6 +65,7 @@ class CrmLeadLost(models.TransientModel):
         leads.lost_end_date = self.end_date
         leads.score = self.score
         leads.x_motivo = self.x_motivo
+        leads.x_motivo_2 = self.x_motivo_2
         return res
 
 class salesTeam(models.Model):
