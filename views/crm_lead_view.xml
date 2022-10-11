@@ -30,12 +30,7 @@
                 <field name="mentor_id"/>
                 <field name="mentor_user_id" invisible="1"/>
             </field>
-            <!--xpath expr="//button[2]" position="attributes">
-                <attribute name="attrs"/>
-                <attribute name="attrs">{'invisible': ['|', ('type', '=', 'opportunity'), '&amp;', ('probability', '=',
-                    0), ('active', '=', False),('stage_name','in',['Primer encuentro','Propietarios sin contactar'])]}
-                </attribute>
-            </xpath-->
+            
             <xpath expr="//div[@class='oe_title']/h2" position="replace"/>
         </field>
     </record>
