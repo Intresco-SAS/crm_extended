@@ -27,7 +27,7 @@
                 <field name="lost_end_date" readonly="1" attrs="{'invisible':[('active', '=', True)]}"/>
                 <field name="score" readonly="1" attrs="{'invisible':[('active', '=', True)]}"/>
                 <field name="stage_name" invisible="1"/>
-                <field name="mentor_id"/>
+                <field name="mentor_id" invisible="1"/>
                 <field name="mentor_user_id" invisible="1"/>
             </field>
             
