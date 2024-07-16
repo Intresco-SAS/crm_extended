@@ -31,42 +31,42 @@ class CrmLead(models.Model):
     #         team_id = self.env['crm.team'].search([('user_id','=',self.env.uid)])
     #         line.facilitador = team_id.user_id.id
 
-class CrmLeadLost(models.TransientModel):
-    _inherit = 'crm.lead.lost'
+# class CrmLeadLost(models.TransientModel):
+#     _inherit = 'crm.lead.lost'
 
-    def _default_crm_lead_date(self):
-        lead_id = self.env['crm.lead'].search([('id','=',self._context.get('default_lead_id'))])
-        if lead_id:
-            return lead_id.date_open
-        else:
-            return datetime.datetime.now().date()
+#     def _default_crm_lead_date(self):
+#         lead_id = self.env['crm.lead'].search([('id','=',self._context.get('default_lead_id'))])
+#         if lead_id:
+#             return lead_id.date_open
+#         else:
+#             return datetime.datetime.now().date()
 
-    start_date = fields.Date(string="StartDate" ,default=_default_crm_lead_date)
-    end_date = fields.Date(string="EndDate",default=fields.Datetime.now)
-    score = fields.Selection([('p_good','Muy Bueno'),('good','Bueno'),('bad','Malo'),('p_bad','Muy Malo')],string="Puntaje")
-    x_motivo = fields.Char(string="Motivo")
-    x_motivo_2 = fields.Selection([('no_interesa_r', 'No esta interesado en recibir el acompañamiento'),
-                                   ('no_interesa_c', 'No está interesado en continuar el acompañamiento'),
-                                   ('no_tiempo', 'No continua con el acompañamiento por falta de tiempo o disposición'),
-                                   ('no_salud', 'No continua con el acompañamiento por temas de salud o de fuerza mayor'),
-                                   ('no_datos', 'No Autoriza y/o quiere dar sus datos y del micronegocio'),
-                                   ('num_mal', 'Numero de contacto equivocado'),
-                                   ('no_conta', 'No se pudo contactar'),
-                                   ('cierre_mic', 'Cierre del micronegocio / cambio de administración'),
-                                   ('pro_trab', 'El propietario está actualmente trabajando o empezara a trabajar'),
-                                   ('des_acom', 'Desconocimiento frente al proceso de acompañamiento'),
-                                   ('dupl', 'Duplicado/Registrado por error'),
-                                   ('no_rec', 'No puede realizar actividades por falta de recursos"')])
+#     start_date = fields.Date(string="StartDate" ,default=_default_crm_lead_date)
+#     end_date = fields.Date(string="EndDate",default=fields.Datetime.now)
+#     score = fields.Selection([('p_good','Muy Bueno'),('good','Bueno'),('bad','Malo'),('p_bad','Muy Malo')],string="Puntaje")
+#     x_motivo = fields.Char(string="Motivo")
+#     x_motivo_2 = fields.Selection([('no_interesa_r', 'No esta interesado en recibir el acompañamiento'),
+#                                    ('no_interesa_c', 'No está interesado en continuar el acompañamiento'),
+#                                    ('no_tiempo', 'No continua con el acompañamiento por falta de tiempo o disposición'),
+#                                    ('no_salud', 'No continua con el acompañamiento por temas de salud o de fuerza mayor'),
+#                                    ('no_datos', 'No Autoriza y/o quiere dar sus datos y del micronegocio'),
+#                                    ('num_mal', 'Numero de contacto equivocado'),
+#                                    ('no_conta', 'No se pudo contactar'),
+#                                    ('cierre_mic', 'Cierre del micronegocio / cambio de administración'),
+#                                    ('pro_trab', 'El propietario está actualmente trabajando o empezara a trabajar'),
+#                                    ('des_acom', 'Desconocimiento frente al proceso de acompañamiento'),
+#                                    ('dupl', 'Duplicado/Registrado por error'),
+#                                    ('no_rec', 'No puede realizar actividades por falta de recursos"')])
 
-    def action_lost_reason_apply(self):
-        res = super(CrmLeadLost, self).action_lost_reason_apply()
-        leads = self.env['crm.lead'].browse(self.env.context.get('active_ids'))
-        leads.lost_start_date = self.start_date
-        leads.lost_end_date = self.end_date
-        leads.score = self.score
-        leads.x_motivo = self.x_motivo
-        leads.x_motivo_2 = self.x_motivo_2
-        return res
+    # def action_lost_reason_apply(self):
+    #     res = super(CrmLeadLost, self).action_lost_reason_apply()
+    #     leads = self.env['crm.lead'].browse(self.env.context.get('active_ids'))
+    #     leads.lost_start_date = self.start_date
+    #     leads.lost_end_date = self.end_date
+    #     leads.score = self.score
+    #     leads.x_motivo = self.x_motivo
+    #     leads.x_motivo_2 = self.x_motivo_2
+    #     return res
 
 class salesTeam(models.Model):
     _inherit = 'crm.team'
